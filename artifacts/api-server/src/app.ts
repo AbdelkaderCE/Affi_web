@@ -4,6 +4,7 @@ import pinoHttp from "pino-http";
 import path from "path";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { requireAuth } from "./middlewares/requireAuth";
 
 const app: Express = express();
 
@@ -34,6 +35,16 @@ app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 const uploadsDir = path.join(process.cwd(), "uploads");
 app.use("/api/uploads", express.static(uploadsDir));
 
+app.use("/api/auth/login", router);
+app.use("/api/auth/me", router);
+app.use("/api/categories", router);
+app.use("/api/products", router);
+app.use("/api/posts", router);
+app.use("/api/upload", router);
 app.use("/api", router);
+
+app.use("/api/admin", requireAuth, (_req, res) => {
+  res.json({ ok: true });
+});
 
 export default app;

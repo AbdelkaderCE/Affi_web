@@ -8,7 +8,6 @@ import Homepage from "@/pages/Homepage";
 import ProductDetail from "@/pages/ProductDetail";
 import BlogList from "@/pages/BlogList";
 import BlogPost from "@/pages/BlogPost";
-
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import Login from "@/pages/admin/Login";
 import Dashboard from "@/pages/admin/Dashboard";
@@ -17,7 +16,6 @@ import ProductForm from "@/pages/admin/ProductForm";
 import Posts from "@/pages/admin/Posts";
 import PostForm from "@/pages/admin/PostForm";
 import Categories from "@/pages/admin/Categories";
-
 import { ContentProvider } from "@/context/ContentContext";
 import { AdminProvider } from "@/context/AdminContext";
 import { AuthProvider } from "@/context/AuthContext";
@@ -27,16 +25,11 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      {/* Public routes */}
       <Route path="/" component={Homepage} />
       <Route path="/products/:slug" component={ProductDetail} />
       <Route path="/blog" component={BlogList} />
       <Route path="/blog/:slug" component={BlogPost} />
-
-      {/* Admin login — no auth guard */}
       <Route path="/admin/login" component={Login} />
-
-      {/* Admin routes — all wrapped in AdminLayout */}
       <Route path="/admin/products/new">
         <AdminLayout><ProductForm /></AdminLayout>
       </Route>
@@ -61,7 +54,6 @@ function Router() {
       <Route path="/admin">
         <AdminLayout><Dashboard /></AdminLayout>
       </Route>
-
       <Route component={NotFound} />
     </Switch>
   );

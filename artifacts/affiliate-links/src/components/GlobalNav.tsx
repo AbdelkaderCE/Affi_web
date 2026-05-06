@@ -19,14 +19,6 @@ export function GlobalNav() {
         <button aria-label="Search" className="hover:opacity-80 transition-opacity" data-testid="nav-search-button">
           <Search className="w-4 h-4" />
         </button>
-        <Link href="/admin">
-          <button
-            className="hidden md:flex items-center gap-1.5 text-[11px] font-medium bg-white/10 hover:bg-white/20 transition-colors px-3 py-1 rounded-full"
-            data-testid="nav-admin-button"
-          >
-            Admin
-          </button>
-        </Link>
         <button className="md:hidden hover:opacity-80 transition-opacity" aria-label="Menu" data-testid="nav-menu-button">
           <Search className="w-4 h-4" />
         </button>
