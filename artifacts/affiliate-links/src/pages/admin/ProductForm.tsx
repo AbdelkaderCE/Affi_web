@@ -16,13 +16,14 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, Plus, X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 
 export default function ProductForm() {
   const { id } = useParams();
   const [, navigate] = useLocation();
   const queryClient = useQueryClient();
   const isEdit = id && id !== "new";
+  const productId = isEdit ? Number(id) : null;
 
   const [formData, setFormData] = useState<Partial<Product>>({
     title: "",
@@ -42,11 +43,13 @@ export default function ProductForm() {
     queryFn: () => api.categories.list(),
   });
 
-  const { data: product, isLoading: productLoading } = useQuery({
-    queryKey: ["product", id],
-    queryFn: () => api.products.get(id!),
-    enabled: !!isEdit,
+  const { data: products = [] } = useQuery({
+    queryKey: ["products", "all"],
+    queryFn: () => api.products.list({ status: "all" }),
   });
+
+  const product = isEdit ? products.find((item) => item.id === productId) ?? null : null;
+  const productLoading = isEdit && !product && products.length === 0;
 
   useEffect(() => {
     if (product) {
@@ -130,7 +133,7 @@ export default function ProductForm() {
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 md:col-span-2">
             <Label>Images</Label>
             <div className="grid grid-cols-2 gap-4">
               {formData.images?.map((img, idx) => (
