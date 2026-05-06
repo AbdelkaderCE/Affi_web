@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "7TOcJKflU4dw5EgziML7q"
+uri = "file://artifacts/affiliate-links/src/assets/hero-1.png"
+type = "image"
+title = "laptop on desk"
+
+[[generated]]
+id = "UR-dFmpYouQaXYeYXwyGQ"
+uri = "file://artifacts/affiliate-links/src/assets/hero-2.png"
+type = "image"
+title = "headphones on stand"
+
+[[generated]]
+id = "M6l-ZeN42miqm85sfX_5c"
+uri = "file://artifacts/affiliate-links/src/assets/hero-3.png"
+type = "image"
+title = "smartwatch lying flat"
+
+[[generated]]
+id = "uU_K2LcIOZ6qOxRG9_6qx"
+uri = "file://artifacts/affiliate-links/src/assets/hero-4.png"
+type = "image"
+title = "mechanical keyboard"
+
+[[generated]]
+id = "YwyHejAFx956kILjBJ-cB"
+uri = "file://artifacts/affiliate-links/src/assets/tech-1.png"
+type = "image"
+title = "tablet with stylus"
+
+[[generated]]
+id = "HxTIiIsRLPfP6LebprMqo"
+uri = "file://artifacts/affiliate-links/src/assets/tech-2.png"
+type = "image"
+title = "ergonomic mouse"
+
+[[generated]]
+id = "4QoOw862F8uidNy-dRS-d"
+uri = "file://artifacts/affiliate-links/src/assets/editorial-1.png"
+type = "image"
+title = "backpack lifestyle"
+
+[[generated]]
+id = "aT9ZhYl6lEksVmYNJt-m1"
+uri = "file://artifacts/affiliate-links/src/assets/home-1.png"
+type = "image"
+title = "coffee maker"
+
+[[generated]]
+id = "Nu4Lzotmp7n1zc8S7trf8"
+uri = "file://artifacts/affiliate-links/src/assets/home-2.png"
+type = "image"
+title = "desk lamp"
+
+[[generated]]
+id = "t67A4ap0ajHlxH_RvnjGO"
+uri = "file://artifacts/affiliate-links/src/assets/review-1.png"
+type = "image"
+title = "review thumbnail desk"
