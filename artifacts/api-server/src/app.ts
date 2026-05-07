@@ -4,11 +4,18 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import pinoHttp from "pino-http";
 import path from "path";
+import { fileURLToPath } from "url";
 import router from "./routes";
 import { logger } from "./lib/logger";
 import { requireAuth } from "./middlewares/requireAuth";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const isProd = process.env["NODE_ENV"] === "production";
+
 const app: Express = express();
+
+app.set("trust proxy", 1);
 
 const allowedOrigins = process.env["ALLOWED_ORIGINS"]
   ? process.env["ALLOWED_ORIGINS"].split(",").map((o) => o.trim())
@@ -17,6 +24,18 @@ const allowedOrigins = process.env["ALLOWED_ORIGINS"]
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: isProd
+      ? {
+          directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "blob:", "https:"],
+            connectSrc: ["'self'"],
+            fontSrc: ["'self'", "data:"],
+          },
+        }
+      : false,
   }),
 );
 
@@ -92,5 +111,13 @@ app.use("/api", router);
 app.use("/api/admin", requireAuth, (_req, res) => {
   res.json({ ok: true });
 });
+
+if (isProd) {
+  const frontendDist = path.resolve(__dirname, "../../affiliate-links/dist/public");
+  app.use(express.static(frontendDist));
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(frontendDist, "index.html"));
+  });
+}
 
 export default app;
